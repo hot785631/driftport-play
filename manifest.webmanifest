@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "漂流港 · 七港航路",
+  "short_name": "漂流港",
+  "description": "由数学与物理经典启发的海上探索游戏。七港航路，九重门藏。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#081e27",
+  "theme_color": "#102e39",
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
