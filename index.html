@@ -72,7 +72,7 @@ body{overscroll-behavior:none}button{touch-action:manipulation}
 <div id="context"></div><section id="story" hidden><span class="eyebrow">长夜号 / 航行手记</span><p id="story-text"></p></section>
 <section id="recorder" hidden><span class="eyebrow">测绘员的航迹钟</span><p id="record-status">等时记录准备中</p><p id="mail-progress"></p><button id="record-toggle">隐藏时标 R</button></section>
 <footer><div class="keys"><span><kbd>W A S D</kbd> 驾驶</span><span><kbd>Shift</kbd> 减速停船</span><span><kbd>Space</kbd> 抓取 / 松开</span></div><div class="caption">先把人带回来。海图可以晚一点画。</div></footer>
-<div id="paused" class="overlay" hidden><div><span class="eyebrow">潮汐暂歇</span><h2>船在等你。</h2><button id="resume" class="primary">继续航行</button><p>航行进度自动保存在此浏览器。</p><button id="touch-toggle" aria-pressed="false">触控：关</button><p>触屏：按住海面驾驶，触点相对船的位置决定方向，越远越快，靠近船身或松手停船。轻点近处对象交互；轻点远处短途驶近。声纳轻点船身记录，镜片直接拖动，投信轻点瞄准处。第二根手指可在驾驶时轻点对象。建议横屏。</p><button id="dialogue-toggle">对白：显示</button><p>在说话处停留，可留时间阅读；按 Space、进入新剧情或驶远会收起对白。</p><button id="continue-third">直接试玩：第三章 · 共流峡</button><p>新建第三章试玩航程，会替换当前进度。</p><button id="continue-home">直接试玩：禾回到旧工位</button><p>船坞已通电，从回港邀请禾开始；会重置试玩进度。</p><button id="continue-night">直接试玩：长夜号的回应</button><p>已完成复航，船在残骸北侧。此入口会重置试玩进度。</p><button id="continue-new">直接试玩：旧站邮匣</button><p>试玩捷径：已救回船员、安装推进器，位于旧站旁。</p></div></div>
+<div id="paused" class="overlay" hidden><div><span class="eyebrow">潮汐暂歇</span><h2>船在等你。</h2><button id="resume" class="primary">继续航行</button><p>航行进度自动保存在此浏览器。</p><button id="touch-toggle" aria-pressed="false">触控：关</button><p>触屏：按住海面驾驶，触点相对船的位置决定方向，越远越快，靠近船身或松手停船。轻点近处对象交互；轻点远处短途驶近。声纳轻点船身记录，镜片直接拖动，投信轻点瞄准光点。第二根手指可在驾驶时轻点对象。建议横屏。</p><button id="dialogue-toggle">对白：显示</button><p>在说话处停留，可留时间阅读；按 Space、进入新剧情或驶远会收起对白。</p><button id="continue-third">直接试玩：第三章 · 共流峡</button><p>新建第三章试玩航程，会替换当前进度。</p><button id="continue-home">直接试玩：禾回到旧工位</button><p>船坞已通电，从回港邀请禾开始；会重置试玩进度。</p><button id="continue-night">直接试玩：长夜号的回应</button><p>已完成复航，船在残骸北侧。此入口会重置试玩进度。</p><button id="continue-new">直接试玩：旧站邮匣</button><p>试玩捷径：已救回船员、安装推进器，位于旧站旁。</p></div></div>
 <section id="workshop" hidden><span class="eyebrow">归潮号 / 修船匠 岚</span><h2>人已平安。轮到修一修你的船。</h2><p>测绘员把航迹钟留在船上。<br>豆灯：“它走得好安静。我来守着。”</p><p>选一次改装，再去东北方接回最后一道信号。每项消耗 2 份材料。</p><div class="choices"><button data-upgrade="engine"><strong>风囊推进器</strong><span>最高航速 190 → 220。<br>尾部装上蓝色推进灯。</span></button><button data-upgrade="winch"><strong>远伸牵引器</strong><span>抓取范围从 100 增至 128。<br>在更远的位置接取与牵引。</span></button><button data-upgrade="hold"><strong>分舱货架</strong><span>装载上限 10 → 12。<br>船体微扩，增加货架。</span></button><button data-upgrade="armor"><strong>船体护板</strong><span>船体上限 3 → 3.5。<br>舷侧加装一节护板。</span></button></div><button id="later">先去收集材料</button></section>
 <section id="ending" hidden><span class="eyebrow">第一章完成 / 一处可以回来的地方</span><h2>灯下，又有人干活了。</h2><p>禾把借走的扳手挂回空位，拨亮工作灯。<br>湾里的渡船又经过了。这一次，长夜号有人回答。</p><p>失灯塔的椭圆航道上会出现巡行箱。停稳布钩，命中后自动收取 2 份材料；取走后，每 2 分钟补充一箱。</p><p>禾：“旧海图还在后舱。空白的地方很多，我们可以接着记。”</p><p>雾外仍有三座旧航标应答，却没有人记得它们的位置。禾把测向仪放到了船上。</p><button id="depart-expedition" class="primary">第二章 · 驶向雾外</button><p id="report"></p><button id="keep" class="primary">留在湾里，再航行一会儿</button></section>
 <dialog id="notes" aria-labelledby="notes-title">
@@ -3109,7 +3109,7 @@ function expeditionUI(){const e=s.expedition,atYard=E.atShipyard(s);$('#exp-prog
  if(chosenDestination?.trackShip){const ship=chosenDestination.trackShip.startsWith('world:')?Horizons.bodies(s).find(b=>b.id===chosenDestination.trackShip.slice(6)):chosenDestination.trackShip.startsWith('merchant:')?Merchant.bodies(s).find(b=>b.id===chosenDestination.trackShip.slice(9)):chosenDestination.trackShip.startsWith('open:')?OpenSeas.bodies(s).find(b=>b.id===chosenDestination.trackShip.slice(5)):chosenDestination.trackShip.startsWith('confl:')?Confluence.bodies(s).find(b=>b.id===chosenDestination.trackShip.slice(6)):e?.fleet.find(b=>b.id===chosenDestination.trackShip);if(ship){chosenDestination.x=ship.x;chosenDestination.y=ship.y;}else chosenDestination=null;}
  else if(chosenDestination&&D.dist(s.ship,chosenDestination)<110)chosenDestination=null;
  if(!e)return;$('#exp-count').textContent=e.sites.map(p=>p.recovered?'◆':p.located?'◈':'◇').join('  ');
- if(s.confluence){const status=Confluence.status(s),follow=s.confluence.follow;$('#exp-progress>span').textContent='共流峡 · 同行接驳';$('#exp-count').textContent=s.confluence.done.map(done=>done?'◆':'◇').join('  ')+(status.joined?' · '+status.remaining.toFixed(1)+'s':follow.active?' · 跟随 '+Math.max(0,Confluence.FOLLOW_SECONDS-follow.held).toFixed(1)+'s':'');}else $('#exp-progress>span').textContent='雾外航标';const c=D.closest(s);if(c&&!c.silent&&!s.hook&&c.label)$('#context').textContent=(c.pointer?'':'Space · ')+c.label;
+ if(s.confluence){const status=Confluence.status(s),follow=s.confluence.follow;$('#exp-progress>span').textContent='共流峡 · 同行接驳';$('#exp-count').textContent=s.confluence.done.map(done=>done?'◆':'◇').join('  ')+(status.joined?' · '+status.remaining.toFixed(1)+'s':follow.active?' · 跟随 '+Math.max(0,Confluence.FOLLOW_SECONDS-follow.held).toFixed(1)+'s':'');}else $('#exp-progress>span').textContent='雾外航标';const c=D.closest(s);$('#context').dataset.touchTarget=c&&D.dist(c,s.ship)<1?'self':'object';if(c&&!c.silent&&!s.hook&&c.label)$('#context').textContent=(c.pointer?'':'Space · ')+c.label;
 }
 function persist(){if(typeof syncGateCollection==='function')syncGateCollection();if(!$('#voyage-menu').hidden)return;lastSaveAt=s.t;try{const saveState=typeof debugSaveState==='function'?debugSaveState():s;localStorage.setItem(SAVE_KEY,DriftSave.encode(saveState));localStorage.setItem(SAVE_KEY+'-reading',JSON.stringify({seen:[...seen],dialogueVisible,sound}));saveProblem=false;}catch(err){saveProblem=true;$('#save-status').textContent='此浏览器暂时无法保存进度；当前仍可继续航行。';}}
 function readSave(){try{return DriftSave.decode(localStorage.getItem(SAVE_KEY)||'');}catch{return null;}}
@@ -3477,7 +3477,7 @@ function drawArchivedGateMap(c,px,py,full){for(const p of GateKeepsakes.monument
   function promote(id,f){if(f.mode!=='pending'||driver!==null)return;driver=id;f.mode='drive';stopDestination();onDrive();}
   function end(e,cancel=false){const f=fingers.get(e.pointerId);if(!f)return;e.preventDefault?.();fingers.delete(e.pointerId);if(driver===e.pointerId)driver=null;if(mirror===e.pointerId){mirror=null;dragEnd();return;}
    if(cancel||!allowed()||f.mode!=='pending'||f.moved||now()-f.at>=HOLD)return;
-   const p=toWorld(f);if(tap(p))return;
+   const p=toWorld(f);if(tap(p)){stopDestination();return;}
    // Unreachable objects are destinations, never remotely invoked actions.
    // A short sail ends on arrival, obstruction, or timeout.
    if(driver===null){destination={...p,until:now()+8000};lastDistance=Infinity;stalledAt=now();onDrive();}
@@ -3503,6 +3503,7 @@ let touchMode=!!window.matchMedia?.('(any-pointer: coarse)').matches;
 function touchAllowed(){return !paused&&$('#voyage-menu').hidden&&!['#finale-dialog','#gate-inspect','#notes','#chart-dialog','#collections-dialog','#merchant-dialog'].some(id=>$(id).open);}
 function seaScreen(p){const r=canvas.getBoundingClientRect();return{x:r.left+cw/2+(p.x-camera.x)*zoom,y:r.top+ch/2+40+(p.y-camera.y)*zoom};}
 function touchPointerKind(p){return Math.max(0,...[Chapters,ReviewJobs,OpenSeas].map(m=>m.pointerPriority?.(s,p)||0));}
+function touchAimDistance(p){return Math.min(...[Chapters,ReviewJobs,OpenSeas].filter(m=>m.pointerPriority?.(s,p)===1).map(m=>m.pointerDistance?.(s,p)??Infinity));}
 function touchTap(p){
  const radius=Math.max(28,Math.min(80,32/zoom)),nearSelf=D.dist(s.ship,p)<=radius;
  // Self tap releases a tow or records a measurement. Secret sonar remains
@@ -3511,7 +3512,7 @@ function touchTap(p){
  const action=D.closest(s,q=>D.dist(q,p)<=radius);
  if(action&&!action.pointer&&!/^journey-5-aim-/.test(action.id)){const dismiss=action.id===D.closest(s)?.id&&dismissesSameConversation();closeDialogue();if(!dismiss)D.hook(s,p,radius);events();return true;}
  // Aiming is tap-only; holding this same water always means drive.
- if(touchPointerKind(p)===1&&!nearSelf){closeDialogue();const hit=Horizons.pointer(s,p,true);Horizons.pointer(s,p,false);events();return hit;}
+ if(touchPointerKind(p)===1&&!nearSelf&&touchAimDistance(p)<=Math.max(90,48/zoom)){closeDialogue();const hit=Horizons.pointer(s,p,true);Horizons.pointer(s,p,false);events();return hit;}
  if(nearSelf){closeDialogue();return true;}return false;
 }
 const touchControls=DriftTouch.create({surface:canvas,allowed:()=>touchMode&&touchAllowed(),enable:()=>{touchMode=true;},shipScreen:()=>seaScreen(s.ship),toWorld:p=>seaPoint({clientX:p.x,clientY:p.y}),toScreen:seaScreen,tap:touchTap,
@@ -3521,7 +3522,7 @@ function updateTouchControls(){
  document.body.classList.toggle('touch-mode',touchMode);const ready=touchMode&&touchAllowed();$('#touch-controls').hidden=!ready;if(!ready)touchControls.reset();
  $('#touch-undo').hidden=!(s.ninefold?.sonar?.mode==='drawing'||s.horizon?.open?.trial?.kind==='bearing');
  const point=ready?touchControls.feedback():null,mark=$('#touch-aim');mark.hidden=!point;if(point){mark.style.left=point.x+'px';mark.style.top=point.y+'px';}
- if(touchMode)for(const id of ['#context','#toast','#hint']){const e=$(id),c=id==='#context'?D.closest(s):null,next=touchText(c&&/^Space · /.test(e.textContent)?e.textContent.replace(/^Space · /,D.dist(c,s.ship)<1?'轻点船身 · ':'轻点对象 · '):e.textContent);if(next!==e.textContent)e.textContent=next;}
+ if(touchMode)for(const id of ['#context','#toast','#hint']){const e=$(id),next=touchText(id==='#context'?e.textContent.replace(/^Space · /,e.dataset.touchTarget==='self'?'轻点船身 · ':'轻点对象 · '):e.textContent);if(next!==e.textContent)e.textContent=next;}
  $('#touch-toggle').textContent=touchMode?'触控：开':'触控：关';$('#touch-toggle').setAttribute('aria-pressed',String(touchMode));
 }
 $('#touch-undo').onclick=()=>{if(touchMode&&touchAllowed())undoSeaLine();};
