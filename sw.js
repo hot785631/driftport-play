@@ -2,7 +2,7 @@
 // Versioned application shell. New versions wait until the player elects to update.
 const ROOT=self.registration.scope;
 const PREFIX='driftport-pwa:'+ROOT+':';
-const CACHE=PREFIX+'725e29858456b470';
+const CACHE=PREFIX+'97f6fe1050f15394';
 const FILES=['index.html','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png'];
 const urls=FILES.map(file=>new URL(file,ROOT).href);
 self.addEventListener('install',event=>event.waitUntil((async()=>{
